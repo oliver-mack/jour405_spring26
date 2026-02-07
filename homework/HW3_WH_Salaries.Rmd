@@ -49,7 +49,7 @@ max(wh_salaries$SALARY)
 Write a couple of sentences describing the results of your analysis. What do the mean and median salaries tell you about the data? What do the minimum and maximum salaries tell you? Are there any outliers in the data?
 
 ANSWER HERE
-The median is less than the mean which means that the data is positively distributed, so most staffers likely have lower salaries (comparitevly) and there are a few outliers who make far more. The minimum and maximum tells us this same story. The minimum is zero, because several staff members had no reported salary, and the maximum is 225700, which is far larger than the median and mean.
+The median is less than the mean which means that the data is positively distributed, so most staffers likely have lower salaries (comparatively) and there are a few outliers who make far more. The minimum and maximum tells us this same story. The minimum is zero, because several staff members had no reported salary, and the maximum is 225700, which is far larger than the median and mean.
 
 ### Task 7: Story Idea
 
