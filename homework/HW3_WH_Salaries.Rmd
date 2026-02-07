@@ -32,7 +32,7 @@ Eight employees recorded zero dollars, this could skew the mean. Many of the hig
 Write code to calculate the mean and median of the salaries in the dataset using the `summarize()` function. You don't need to make a new dataframe, just display the results.
 
 ```{r}
-summary(wh_salaries$SALARY)
+summarize(wh_salaries, mean_salary = mean(SALARY), median_salary = median(SALARY))
 ```
 
 ### Task 5: Add in the minimum and maximum salaries
@@ -40,8 +40,7 @@ summary(wh_salaries$SALARY)
 Take the code you just wrote and add in the minimum and maximum salaries (the functions for that are `min()` and `max()`). Your results should show four columns: mean_salary, median_salary, min_salary, max_salary.
 
 ```{r}
-min(wh_salaries$SALARY)
-max(wh_salaries$SALARY)
+summarize(wh_salaries, mean_salary = mean(SALARY), median_salary = median(SALARY), min_salary=min(SALARY), max_salary = max(SALARY))
 ```
 
 ### Task 6: Describe the Results
