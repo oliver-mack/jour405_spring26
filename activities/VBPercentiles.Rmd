@@ -30,6 +30,7 @@ team_aces <- matches |>
 
 ```{r}
 team_aces |> mutate(percentile = ntile(total_aces, 100))
+summary (team_aces$total_aces)
 ```
 
 
@@ -37,7 +38,7 @@ team_aces |> mutate(percentile = ntile(total_aces, 100))
 
 Write a couple of sentences that puts Maryland into context with the other teams in the dataset. You can do some Internet research to help with this.
 
-Maryland volleyball ranked in the 95th percentile of service aces during the 2024 season. This means Maryland volleyball completed more than or the same amount of service aces as 95% of all NCAA women's volleyball teams. They ranked 17 out of 343 in number of service aces throughout the season.
+Maryland volleyball ranked in the 95th percentile of service aces during the 2024 season. This means Maryland volleyball completed more than or the same amount of service aces as 95% of all NCAA women's volleyball teams. They ranked 17 out of 343 in number of service aces throughout the season. Despite the high number of service aces, Maryland went 14-17 during the season, 5-15 in the Big Ten.
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
 
