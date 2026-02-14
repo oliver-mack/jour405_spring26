@@ -61,3 +61,12 @@ Property crime decreased in many Maryland cities in 2020.
 ### Task 9: Save Your Work and Put it on GitHub
 
 Save this notebook, then commit it to your local repository. Push the changes to your GitHub repository and submit the URL for this file in ELMS.
+
+### Task 10: HW5
+```{r}
+md_cities_percentiles <- md_cities_rates |> mutate(percentile = ntile(md_cities_rates$violent_rate_2020, n=100))
+md_cities_percentiles |> summarize(IQR = IQR(violent_rate_2020)
+```
+Do the results change your best story idea from the previous assignment? Why or why not?
+
+This is a very large IQR when comparing to the median, so it would be interesting to see why some areas with the highest percentiles have such high crime rates, but I think the 2020 reduction in crime is still the story I would go with here. Ocean City is at the top of the percentile, so there's another interesting story there.
