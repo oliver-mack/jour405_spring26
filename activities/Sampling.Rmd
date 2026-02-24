@@ -61,7 +61,7 @@ population_stats
 
 Compare the means and standard deviations. Are they similar? Go back and re-run the sampling and statistics calculations with a smaller sample size. How do the results change?
 
-The mean age is slightly higher in the population, but the standard deviation is slightly lower. However, they are mostly the same. When we change the sample to 20, the mean age is actually more accurate to the population than in the 100-person sample, but the standard deviation is larger than both the 100-person sample and the population.
+The mean age is slightly higher in the population, but the standard deviation is slightly lower. However, they are mostly the same. When we change the sample to 20, the mean age is actually more accurate to the population than in the 100-person sample, but the standard deviation is larger than both the 100-person sample and the population. This is interesting because usually in a much smaller sample, the sample mean might be further away from the population mean.
 
 
 When finished, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
