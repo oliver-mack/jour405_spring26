@@ -1,6 +1,6 @@
 ---
 title: "Baltimore County 911 Overdose Calls Analysis"
-author: "YOUR NAME HERE"
+author: "Oliver Mack"
 ---
 
 ```{r setup, include=FALSE}
@@ -74,7 +74,7 @@ summary(daily_calls$call_count)
 
 Let's visualize the time series of daily calls. What patterns do you see? If you had to draw horizontal lines that would highlight unusual days, where would those lines be?
 
-ANSWER HERE
+I think there is a slight rise in the spring/summer and then it starts dipping down as you get to the winter. There is a dip towards the 2023 side of the graph. There are some outliers during the spring and summer and then two more unusual days in early October and New Year's Day.
 
 ```{r daily-calls-plot}
 # Plot daily call volume
@@ -137,7 +137,7 @@ unusual_days |>
 
 Let's visualize these unusual days in the context of the full dataset. How do they differ from your answer on Task 3?
 
-ANSWER HERE
+The unusually high days happen mostly in the first half of the data set (late winter, spring, summer), and the majority of the low days happened in the latter half of the data set, in the fall and winter. The general trend is the similar to my answer before, but the story isn't in the October and New Year's outliers specifically, it's in that larger trend of seasons.
 
 ```{r plot-unusual-days}
 # Create a clean factor for the plot legend
@@ -207,7 +207,7 @@ ggplot(dow_summary, aes(x = day_of_week, y = avg_calls)) +
 
 We can also calculate z-scores that account for the day of the week pattern. How would you describe the day with the highest z-score without using the term "z-score"?
 
-ANSWER HERE
+Compared to the other days of the week, Saturdays averaged the highest volume of overdoses. 
 
 ```{r day-of-week-z-scores}
 # Calculate day-of-week adjusted z-scores
@@ -298,5 +298,5 @@ top_outliers |> kable(digits = 2)
 
 Based on our z-score analysis, what are some potential angles for reporting? What would your next steps be and what would you tell an editor about your findings?
 
-ANSWER HERE
+I would look at the seasonal trends, analyzing why there are fewer overdoses in the winter and fall. I would also look at the outlier days and figure out what was going on at the time (like the July dates with the bad batch).
 
