@@ -5,27 +5,48 @@ title: "HW8_MandMs"
 In this assignment, you'll be picking up where you left off with the M&Ms activity. You'll load the data and perform some basic statistical analysis. Follow the steps below to complete the assignment.
 
 ### Task 1: Load the tidyverse
+```{r}
+library(tidyverse)
+```
 
 
 ### Task 2: Load the M&Ms dataset from https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/mandms.csv
+```{r}
+ces <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/mandms.csv")
+```
 
 
 ### Task 3: Sample 5 rows of data from the dataset
+```{r}
+set.seed(42)
+sample_5 <- ces |> sample_n(5)
+```
 
 
 ### Task 4: Calculate the mean age and standard deviation of the sample, using either the blue or white number of M&Ms
+```{r}
+sample_5 |>
+summarize(mean_sample = mean(red), sd_sample = sd(red))
+```
 
 
 ### Task 5: Calculate the mean age and standard deviation of the population, using the same measure as in Task 4
+```{r}
+ces |>
+summarize(mean_population = mean(red), sd_population = sd(red))
+```
 
 
 ### Task 6: Compare the sample and population statistics
 
 Compare the two sets of means and standard deviations. Are they similar?
 
+The two sets are somewhat similar. Though the mean is a little bit smaller for the population, the standard deviation is the biggest difference, with the full population having more variablity than the sample. 
+
 ### Task 7: Describe the results
 
 Write a few sentences about what you found in the data. What does this tell you about the M&Ms dataset and about the act of random sampling?
 
+It's interesting that there is more variation in the sample than in the population. The sample doesn't accurately represent the true spread of the population, but the means are somewhat close together. This data tells us that there's an average of around 73 red M&Ms in each set.
 
 When finished, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
