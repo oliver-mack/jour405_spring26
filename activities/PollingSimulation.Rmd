@@ -43,7 +43,6 @@ Use `set.seed(42)` and then sample 50 rows from `ces`. Save it as `sample_50`. C
 
 ```{r}
 set.seed(42)
-
 sample_50 <- ces |> sample_n(50)
 
 proportion_50 <- mean(sample_50$unaffiliated)
