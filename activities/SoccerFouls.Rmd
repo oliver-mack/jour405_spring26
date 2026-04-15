@@ -49,5 +49,24 @@ matches |>
 
 ### Task 6: Describe the results of both the correlation calculation and the scatterplot.
 
+I would say there isn't a correlation here. There doesn't seem to be a clear relationship between the number of goal differentials and the number of fouls. Both the calculation and the scatterplot indicate a very, very slight positive correlation, though it is not significant enough to consider it a correlation between the two variables.
+
 
 When you are done, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
+
+### Task 7: 
+
+```{r}
+matches |> summarize(correlation = cor(fouls, corners, method="pearson"))
+```
+
+```{r}
+
+matches |> 
+  ggplot() +
+  geom_point(aes(x=goal_diff, y=corners)) +
+  geom_smooth(aes(x=goal_diff, y=corners), method="lm")
+
+```
+
+There is a positive correlation here! We can see in the scatterplot that in general, as the goal differential increases, so do the corners. Though it is not a very strong correlation, it still does exist. 
