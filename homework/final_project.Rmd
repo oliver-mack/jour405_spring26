@@ -9,6 +9,7 @@ I should also do some correlation tests as well just to see if there is a correl
 
 It might also be interesting to look at some lagged correlation statistics if we're able to do that? (As in, see how crime changes one year after unemployment rates have a dramatic rise or fall).
 
+(Also, I updated the second set to use data directly compiled from BLS website!)
 
 
 ```{r load data}
