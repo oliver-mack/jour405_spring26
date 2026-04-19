@@ -3,12 +3,19 @@ title: "final_project"
 output: html_document
 ---
 
+I'd like to do a number of ggplots, geom_point, one for each year (maybe we can look at five or ten over time), to plot each state on the chart, so we can get an overview of where crime rates and unemployment are the worst and if they align at all. I would also like to do some ggplots of different states from across the country (a diverse set, with all different levels of population and different geographic areas) to see what trends for both crime and unemployment look like over time. Seeing the linear regression either over time or by state would be really helpful for this project!
+
+I should also do some correlation tests as well just to see if there is a correlation between the two variables. This would also be for specific years, or we could look at one state over time. It might also be interesting to plot every point on one graph to see the overall correlation over 50 years.
+
+It might also be interesting to look at some lagged correlation statistics if we're able to do that? (As in, see how crime changes one year after unemployment rates have a dramatic rise or fall).
+
+
 
 ```{r load data}
 library(tidyverse)
 
 crime_data_states <- read_csv("https://raw.githubusercontent.com/oliver-mack/jour405_spring26/refs/heads/main/state_crime%20(1).csv")
-unemployment_states <- read_csv("https://raw.githubusercontent.com/oliver-mack/jour405_spring26/refs/heads/main/state_unemployment")
+unemployment_states <- read_csv("https://raw.githubusercontent.com/oliver-mack/jour405_spring26/refs/heads/main/Untitled%20spreadsheet%20-%20staadata.csv")
 ```
 
 Above I've loaded two datasets. The first is crime_data_states, which is crime data on each state from 1960 through 2019. This data is from the CORGIS Dataset Project by Ryan Whitcomb, Joung Min Choi and Bo Guan. It was created in 2021 and it pulls data directly from the FBI's crime statistics page. In this dataset, I think the most important colums are going to be the overall property rate as well as the overall violent rate. I plan to use these columns to directly compare the rates to their respective state unemployment rates. I plan to split this up by year as well, so that we can get a clearer picture of trends over time (if any exist!) This data covers every state from 1960 to 2019, so I am concerned about the age of the data, as we won't have anything for the past seven years. But I plan to look around more for that data this week.
@@ -25,3 +32,9 @@ The second is a dataset I created on my own. I wasn't able to find a good datase
 I then went through 15 states to verify that the data was accurate, and I will go through the rest this week. I took the agency to do this because I didn't think I'd get anything out of spending hours tediously copying the data, but I'm more than happy to keep looking for datasets or do something else if I'm not allowed to use this data! This data covers just 2010 to 2019, though it would be interesting to pull data from every five years between 1960 and 2010, so we can see if there are any changes over the decades, rather than just over the 2010s.
 
 I think I might need help querying the first data set, as there is a lot of data, but I will ask more about that throughout this week! Again, let me know if I shouldn't have used AI to help create the second dataset and I can absolutely find another way to copy this data.
+
+
+```{r}
+
+```
+
