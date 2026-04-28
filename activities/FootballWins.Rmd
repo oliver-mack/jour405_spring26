@@ -1,3 +1,8 @@
+---
+title: "FootballWins"
+output: html_document
+---
+
 
 ---
 title: "Multiple Regression Analysis in R"
@@ -9,7 +14,7 @@ Multiple regression analysis is a statistical method used to understand the rela
 
 ```{r setup}
 library(tidyverse)
-#install.packages('corrplot')
+install.packages('corrplot')
 library(corrplot)
 ```
 
@@ -54,7 +59,7 @@ The coefficients tell us the estimated effect of each independent variable on th
 
 Is this a useful model, based on what you've seen? Why?
 
-ANSWER HERE
+I think that in general, this model is pretty useful. It's statistically significant and especially looking at points scored, we're able to see what is likely a real and meaningful impact. I would still be a bit skeptical to make sure that the variables aren't overlapping or causing the model to be worse, and also making sure that there aren't any other factors that could be influencing wins. 
 
 ## Correlation Analysis
 
@@ -80,8 +85,10 @@ The results from our correlation analysis show the strength of the relationships
 
 Which of these three factors - Yards Gained, Takeaways and Points Scored - have the most impact on wins? Are there any that do not seem impactful at all?
 
-ANSWER HERE
+Clearly we can see that Points scored has the most impact, with takeaways and yards gained having elss and less impact, both with moderate correlations. 
 
 ## Using the Model (3 points)
 
 Without using the words "multiple regression model", describe how you could use this model to cover a team or game.
+
+I think you could use this model to figure out what leads to a teams success and where the biggest issues in the team's playing are. This could be a good basis for a story to help better understand where teams are succeeding and where they're failing and what's leading to the outcomes that they have. You can also use the data to help predict which way a game might be headed based on the teams playing and their past statistics. 
