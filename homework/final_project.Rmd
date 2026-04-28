@@ -14,9 +14,11 @@ It might also be interesting to look at some lagged correlation statistics if we
 
 ```{r load data}
 library(tidyverse)
+library(dplyr)
 
 crime_data_states <- read_csv("https://raw.githubusercontent.com/oliver-mack/jour405_spring26/refs/heads/main/state_crime%20(1).csv")
 unemployment_states <- read_csv("https://raw.githubusercontent.com/oliver-mack/jour405_spring26/refs/heads/main/Untitled%20spreadsheet%20-%20staadata.csv")
+
 ```
 
 Above I've loaded two datasets. The first is crime_data_states, which is crime data on each state from 1960 through 2019. This data is from the CORGIS Dataset Project by Ryan Whitcomb, Joung Min Choi and Bo Guan. It was created in 2021 and it pulls data directly from the FBI's crime statistics page. In this dataset, I think the most important colums are going to be the overall property rate as well as the overall violent rate. I plan to use these columns to directly compare the rates to their respective state unemployment rates. I plan to split this up by year as well, so that we can get a clearer picture of trends over time (if any exist!) This data covers every state from 1960 to 2019, so I am concerned about the age of the data, as we won't have anything for the past seven years. But I plan to look around more for that data this week.
@@ -36,6 +38,76 @@ I think I might need help querying the first data set, as there is a lot of data
 
 
 ```{r}
-
+#this is to clean up the data!
+unemployment_states <- read_csv("https://raw.githubusercontent.com/oliver-mack/jour405_spring26/refs/heads/main/Untitled%20spreadsheet%20-%20staadata.csv") |>
+  filter(!is.na(`FIPS Code`), 
+         nchar(str_trim(as.character(`FIPS Code`))) == 2) |>
+  mutate(across(where(is.character), str_trim)) 
 ```
 
+
+```{r}
+#this is to rename the year variable to match the other dataset.
+unemployment_states <- unemployment_states %>%
+  rename(Year = year)
+```
+
+
+```{r}
+#This is to rename the state/area variable
+unemployment_states <- unemployment_states %>% 
+rename(State = 'state/area')
+```
+```{r}
+#this is to combine the two datasets
+combined <- crime_data_states |> inner_join(unemployment_states, join_by(Year, State))
+```
+```{r}
+#this is just a test chart with all of the data to see an overall correlation
+combined |>
+  ggplot(aes(x = `Unemployment-Rate`, y = `Data.Rates.Violent.All`)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "Unemployment Rate", y = "Violent Crime Rate",
+       title = "Unemployment Rate vs. Violent Crime Rate")
+```
+Since there are 2,244 entries, this upward trend is really interesting to me. Though the data is kind of in a large clump, we can tell that there is the possibility of some type of relationship existing between the two, just due to the fact that there is a slight positive correlation and there are so many different data points. Next is to check the model.
+```{r}
+model <- lm(`Data.Rates.Violent.All` ~ `Unemployment-Rate`, data = combined)
+summary(model)
+```
+P-value is very low and we do have a pretty high coefficient. Our R-squared is pretty low though. So there is a relationship here, but it doesn't seem to be a very strong or predictive. I want to check a few specific years as well.
+
+```{r}
+combined |>
+  filter(Year == 2019) |>
+  ggplot(aes(x = `Unemployment-Rate`, y = `Data.Rates.Violent.All`)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "Unemployment Rate", y = "Violent Crime Rate",
+       title = "Unemployment Rate vs. Violent Crime Rate")
+```
+```{r}
+model <- lm(`Data.Rates.Violent.All` ~ `Unemployment-Rate`, data = combined[combined$Year == 2015, ])
+summary(model)
+```
+
+For the model, I found how to do a specific year filter online and it looks here that we have a bit more predicabiltiy (28%), but it's still not a very strong relationship. The data also looks quite blob-ish, which could indicate a weak relationship even though there is a positive line. Let's try just one state next!
+
+```{r}
+combined |>
+  filter(State == 'Maryland') |>
+  ggplot(aes(x = `Unemployment-Rate`, y = `Data.Rates.Violent.All`)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(x = "Unemployment Rate", y = "Violent Crime Rate",
+       title = "Unemployment Rate vs. Violent Crime Rate")
+```
+
+```{r}
+model <- lm(`Data.Rates.Violent.All` ~ `Unemployment-Rate`, data = combined[combined$State == 'Maryland', ])
+summary(model)
+```
+Somehow, the adjusted R-squared is in the negatives, and I think that the ggplot shows us that there is virtually no relationship here. The p-value is far above the statistically significant level and the data is all over the place on the chart. 
+
+Next, I want to look into the delay a bit more, and check out a few different states. (I found some different trends in different states just by replacing Maryland's name in the graph above, so it'll be interesting to look at different states, especially more populated ones or ones with higher/lower unemployment rates)
