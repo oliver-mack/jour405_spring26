@@ -2,50 +2,6 @@
 title: "final_project"
 output: html_document
 ---
-
-I'd like to do a number of ggplots, geom_point, one for each year (maybe we can look at five or ten over time), to plot each state on the chart, so we can get an overview of where crime rates and unemployment are the worst and if they align at all. I would also like to do some ggplots of different states from across the country (a diverse set, with all different levels of population and different geographic areas) to see what trends for both crime and unemployment look like over time. Seeing the linear regression either over time or by state would be really helpful for this project!
-
-I should also do some correlation tests as well just to see if there is a correlation between the two variables. This would also be for specific years, or we could look at one state over time. It might also be interesting to plot every point on one graph to see the overall correlation over 50 years.
-
-It might also be interesting to look at some lagged correlation statistics if we're able to do that? (As in, see how crime changes one year after unemployment rates have a dramatic rise or fall).
-
-(Also, I updated the second set to use data directly compiled from BLS website!)
-
-
-```{r load data}
-library(tidyverse)
-library(dplyr)
-
-crime_data_states <- read_csv("https://raw.githubusercontent.com/oliver-mack/jour405_spring26/refs/heads/main/state_crime%20(1).csv")
-unemployment_states <- read_csv("https://raw.githubusercontent.com/oliver-mack/jour405_spring26/refs/heads/main/Untitled%20spreadsheet%20-%20staadata.csv")
-
-```
-
-Above I've loaded two datasets. The first is crime_data_states, which is crime data on each state from 1960 through 2019. This data is from the CORGIS Dataset Project by Ryan Whitcomb, Joung Min Choi and Bo Guan. It was created in 2021 and it pulls data directly from the FBI's crime statistics page. In this dataset, I think the most important colums are going to be the overall property rate as well as the overall violent rate. I plan to use these columns to directly compare the rates to their respective state unemployment rates. I plan to split this up by year as well, so that we can get a clearer picture of trends over time (if any exist!) This data covers every state from 1960 to 2019, so I am concerned about the age of the data, as we won't have anything for the past seven years. But I plan to look around more for that data this week.
-
-The second is a dataset I created on my own. I wasn't able to find a good dataset that broke down the unemployment rate by state and also by year, so I pulled data from the U.S. Bureau of Labor Statistics from 2010-2019 and I imported the links into Claude, asking it to do the following: 
-
-"Take the following links and create a csv data set that tells me what the employment percentage was for each state from 2010-2019 make sure you're pulling the data from table 1: 
-2011 and 2010: https://www.bls.gov/news.release/archives/srgune_02292012.pdf
-2012 and 2013: https://www.bls.gov/news.release/archives/srgune_02282014.pdf
-2014 and 2015: https://www.bls.gov/news.release/archives/srgune_02262016.pdf
-2016 and 2017: https://www.bls.gov/news.release/archives/srgune_02272018.pdf
-2018 and 2019: https://www.bls.gov/news.release/archives/srgune_03042020.pdf"
-
-I then went through 15 states to verify that the data was accurate, and I will go through the rest this week. I took the agency to do this because I didn't think I'd get anything out of spending hours tediously copying the data, but I'm more than happy to keep looking for datasets or do something else if I'm not allowed to use this data! This data covers just 2010 to 2019, though it would be interesting to pull data from every five years between 1960 and 2010, so we can see if there are any changes over the decades, rather than just over the 2010s.
-
-I think I might need help querying the first data set, as there is a lot of data, but I will ask more about that throughout this week! Again, let me know if I shouldn't have used AI to help create the second dataset and I can absolutely find another way to copy this data.
-
-
-```{r}
-#this is to clean up the data!
-unemployment_states <- read_csv("https://raw.githubusercontent.com/oliver-mack/jour405_spring26/refs/heads/main/Untitled%20spreadsheet%20-%20staadata.csv") |>
-  filter(!is.na(`FIPS Code`), 
-         nchar(str_trim(as.character(`FIPS Code`))) == 2) |>
-  mutate(across(where(is.character), str_trim)) 
-```
-
-
 ```{r}
 #this is to rename the year variable to match the other dataset.
 unemployment_states <- unemployment_states %>%
@@ -111,3 +67,51 @@ summary(model)
 Somehow, the adjusted R-squared is in the negatives, and I think that the ggplot shows us that there is virtually no relationship here. The p-value is far above the statistically significant level and the data is all over the place on the chart. 
 
 Next, I want to look into the delay a bit more, and check out a few different states. (I found some different trends in different states just by replacing Maryland's name in the graph above, so it'll be interesting to look at different states, especially more populated ones or ones with higher/lower unemployment rates)
+
+
+
+
+
+I'd like to do a number of ggplots, geom_point, one for each year (maybe we can look at five or ten over time), to plot each state on the chart, so we can get an overview of where crime rates and unemployment are the worst and if they align at all. I would also like to do some ggplots of different states from across the country (a diverse set, with all different levels of population and different geographic areas) to see what trends for both crime and unemployment look like over time. Seeing the linear regression either over time or by state would be really helpful for this project!
+
+I should also do some correlation tests as well just to see if there is a correlation between the two variables. This would also be for specific years, or we could look at one state over time. It might also be interesting to plot every point on one graph to see the overall correlation over 50 years.
+
+It might also be interesting to look at some lagged correlation statistics if we're able to do that? (As in, see how crime changes one year after unemployment rates have a dramatic rise or fall).
+
+(Also, I updated the second set to use data directly compiled from BLS website!)
+
+
+```{r load data}
+library(tidyverse)
+library(dplyr)
+
+crime_data_states <- read_csv("https://raw.githubusercontent.com/oliver-mack/jour405_spring26/refs/heads/main/state_crime%20(1).csv")
+unemployment_states <- read_csv("https://raw.githubusercontent.com/oliver-mack/jour405_spring26/refs/heads/main/Untitled%20spreadsheet%20-%20staadata.csv")
+
+```
+
+Above I've loaded two datasets. The first is crime_data_states, which is crime data on each state from 1960 through 2019. This data is from the CORGIS Dataset Project by Ryan Whitcomb, Joung Min Choi and Bo Guan. It was created in 2021 and it pulls data directly from the FBI's crime statistics page. In this dataset, I think the most important colums are going to be the overall property rate as well as the overall violent rate. I plan to use these columns to directly compare the rates to their respective state unemployment rates. I plan to split this up by year as well, so that we can get a clearer picture of trends over time (if any exist!) This data covers every state from 1960 to 2019, so I am concerned about the age of the data, as we won't have anything for the past seven years. But I plan to look around more for that data this week.
+
+The second is a dataset I created on my own. I wasn't able to find a good dataset that broke down the unemployment rate by state and also by year, so I pulled data from the U.S. Bureau of Labor Statistics from 2010-2019 and I imported the links into Claude, asking it to do the following: 
+
+"Take the following links and create a csv data set that tells me what the employment percentage was for each state from 2010-2019 make sure you're pulling the data from table 1: 
+2011 and 2010: https://www.bls.gov/news.release/archives/srgune_02292012.pdf
+2012 and 2013: https://www.bls.gov/news.release/archives/srgune_02282014.pdf
+2014 and 2015: https://www.bls.gov/news.release/archives/srgune_02262016.pdf
+2016 and 2017: https://www.bls.gov/news.release/archives/srgune_02272018.pdf
+2018 and 2019: https://www.bls.gov/news.release/archives/srgune_03042020.pdf"
+
+I then went through 15 states to verify that the data was accurate, and I will go through the rest this week. I took the agency to do this because I didn't think I'd get anything out of spending hours tediously copying the data, but I'm more than happy to keep looking for datasets or do something else if I'm not allowed to use this data! This data covers just 2010 to 2019, though it would be interesting to pull data from every five years between 1960 and 2010, so we can see if there are any changes over the decades, rather than just over the 2010s.
+
+I think I might need help querying the first data set, as there is a lot of data, but I will ask more about that throughout this week! Again, let me know if I shouldn't have used AI to help create the second dataset and I can absolutely find another way to copy this data.
+
+
+```{r}
+#this is to clean up the data!
+unemployment_states <- read_csv("https://raw.githubusercontent.com/oliver-mack/jour405_spring26/refs/heads/main/Untitled%20spreadsheet%20-%20staadata.csv") |>
+  filter(!is.na(`FIPS Code`), 
+         nchar(str_trim(as.character(`FIPS Code`))) == 2) |>
+  mutate(across(where(is.character), str_trim)) 
+```
+
+
