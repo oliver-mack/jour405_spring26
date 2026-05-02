@@ -1,6 +1,6 @@
 ---
 title: "Multiple Regression Analysis: Maryland Voter Turnout"
-name: "YOUR NAME HERE"
+name: "Oliver Mack"
 ---
 
 # Introduction
@@ -9,7 +9,7 @@ Multiple regression analysis is a statistical method used to understand the rela
 
 ```{r setup}
 library(tidyverse)
-#install.packages('corrplot')
+install.packages('corrplot')
 library(corrplot)
 ```
 
@@ -26,7 +26,7 @@ head(md_turnout)
 
 Before building our model, let's explore the data to understand the variables and their relationships. Examine the correlation matrix to see how the independent variables relate to each other and to the dependent variable (voter turnout). Which variables seem to be correlated? Are there any that are not correlated at all? Also look at the multiple scatterplots. Which variables seem to have a linear relationship with the dependent variable? Which do not?
 
-ANSWER HERE
+It looks like, from all three analysis tools, that the percent of people unemployed and the percent of population that's white  have the largest effects on voter turnouts. Unemployment has the strongest relationship, a negative linear one. And the percent of population that's white seems to have a positive linear relationship.
 
 
 ```{r}
@@ -89,7 +89,7 @@ The coefficients tell us the estimated effect of each independent variable on th
 
 Examine the output of the model, checking the coefficients, residuals, and overall model fit. How well does this multiple variable model predict turnout? Do any of the variables seem to be insignificant? Is this a useful model, based on what you've seen? Why?
 
-ANSWER HERE
+The p-vales for income, median_age and pct_white are all statistically significant, but the rest of the variables are not. The multiple r-squared is 0.8539, which means that just over 85% of the data is explained by all of these variables. Then for the residuals, they're centered around 0, which tells us that there isn't too much variance and that the model is useful as well. All of this tells us that this model is generally useful, excpet there are specific variables that may not be useful to look at or analyze. 
 
 ```{r}
 # Build initial model with all predictors
@@ -103,19 +103,19 @@ summary(initial_model)
 
 Create three alternative models by adding or removing variables to see if we can improve the model's performance. Turnout will always be the dependent variable, but you should alter the independent variables by removing or adding some. Then compare the models using adjusted R-squared values. Are any of the models significantly better than the others?
 
-ANSWER HERE
+I made my three variables the ones that showed statistical significant in the previous model. By looking at these variables, we see that model 4 (which is pct_white) actually has the strongest adjusted r-squred which is pretty interesting because in the previous model, it didn't have the strongest relationship.
 
 ```{r}
 # Model 2
-model2 <- lm(turnout ~ REPLACE ME, data = md_turnout)
+model2 <- lm(turnout ~ income, data = md_turnout)
 summary(model2)
 
 # Model 3
-model3 <- lm(turnout ~ REPLACE ME, data = md_turnout)
+model3 <- lm(turnout ~ median_age, data = md_turnout)
 summary(model3)
 
 # Model 4
-model4 <- lm(turnout ~ REPLACE ME, data = md_turnout)
+model4 <- lm(turnout ~ pct_white, data = md_turnout)
 summary(model4)
 
 # Compare models
@@ -144,4 +144,4 @@ ggplot(model_comparison, aes(x = reorder(Model, Adjusted_R_squared), y = Adjuste
 
 Without using the words "multiple regression model", describe how you could use this analysis to cover an election or voter participation story.
 
-ANSWER HERE
+We can use this analysis to figure out what demographic factors affect turnout the most, we can also use them to better understand which groups have higher turnout. 
